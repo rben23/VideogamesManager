@@ -1,4 +1,8 @@
-package VideoJuego;
+package videojuego;
+
+import enums.PlataformaJuego;
+import enums.GeneroJuego;
+import enums.TituloJuego;
 
 import java.util.List;
 import java.util.Objects;
@@ -28,9 +32,10 @@ public class VideojuegoDigital extends Videojuego {
 
     // Overrides -> Padre
     @Override
-    public void videojuego(EnumsJuego.Titulo titulo, double precio, List<EnumsJuego.Genero> genero, List<EnumsJuego.Consola> consola) {
+    public void videojuego(TituloJuego tituloJuego, double precio, List<GeneroJuego> generoJuego, String plataformaJuego) {
 
     }
+
 
     // Overrides -> Aplicar Descuento
     @Override
@@ -53,4 +58,8 @@ public class VideojuegoDigital extends Videojuego {
         return Objects.hash(super.hashCode(), descueto);
     }
 
+    @Override
+    public String toString() {
+        return String.format("%s", super.toString());
+    }
 }

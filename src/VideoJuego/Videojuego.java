@@ -1,41 +1,46 @@
-package VideoJuego;
+package videojuego;
+
+import enums.GeneroJuego;
+import enums.TituloJuego;
+import menus.Menus;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 
 
 public abstract class Videojuego implements IntVideojuego {
 
     // Atributos
-    private EnumsJuego.Titulo titulo;
+    private TituloJuego tituloJuego;
     private double precio;
-    private List<EnumsJuego.Genero> genero;
-    private List<EnumsJuego.Consola> consola;
+    private List<GeneroJuego> generoJuego;
+    private String plataformaJuego;
 
     // Constructor Predeterminado
     public Videojuego() {
-        this.titulo = titulo.AmongUs;
+        this.tituloJuego = tituloJuego.AMONGUS;
         this.precio = 0.0;
-        this.genero = new ArrayList<>();
-        this.consola = new ArrayList<>();
+        this.generoJuego = new ArrayList<>();
+        this.plataformaJuego = "Undefined";
     }
 
     // Constructor Parametrizado
-    public Videojuego(EnumsJuego.Titulo titulo, double precio) {
-        this.titulo = titulo;
+    public Videojuego(TituloJuego tituloJuego, double precio, String plataformaJuego) {
+        this.tituloJuego = tituloJuego;
         this.precio = precio;
-        this.genero = new ArrayList<>();
-        this.consola = new ArrayList<>();
+        this.generoJuego = new ArrayList<>();
+        this.plataformaJuego = plataformaJuego;
     }
 
     // Setter y Getter Titulo
-    public void setTitulo(EnumsJuego.Titulo titulo) {
-        this.titulo = titulo;
+    public void setTitulo(TituloJuego tituloJuego) {
+        this.tituloJuego = tituloJuego;
     }
 
-    public EnumsJuego.Titulo getTitulo() {
-        return titulo;
+    public String getTitulo() {
+        return tituloJuego.toString();
     }
 
     // Setter y Getter Precio
@@ -48,33 +53,29 @@ public abstract class Videojuego implements IntVideojuego {
     }
 
     // Setter y Getter Genero
-    public void setGenero(List<EnumsJuego.Genero> genero) {
-        if (genero != null) {
-            this.genero = new ArrayList<>(genero);
+    public void setGenero(List<GeneroJuego> generoJuego) {
+        if (generoJuego != null) {
+            this.generoJuego = new ArrayList<>(generoJuego);
         } else {
             System.out.println("ERROR");
         }
     }
 
-    public List<EnumsJuego.Genero> getGenero() {
-        return genero;
+    public List<GeneroJuego> getGenero() {
+        return generoJuego;
     }
 
     // Setter y Getter Tipo
-    public void setConsola(List<EnumsJuego.Consola> consola) {
-        if (consola != null) {
-            this.consola = new ArrayList<>(consola);
-        } else {
-            System.out.println("ERROR");
-        }
+    public void setConsola(String plataformaJuego) {
+        this.plataformaJuego = plataformaJuego;
     }
 
-    public List<EnumsJuego.Consola> getConsola() {
-        return consola;
+    public String getPlataformaJuego() {
+        return plataformaJuego;
     }
 
     // Overrides -> Padre
-    public abstract void videojuego(EnumsJuego.Titulo titulo, double precio, List<EnumsJuego.Genero> genero, List<EnumsJuego.Consola> consola);
+    public abstract void videojuego(TituloJuego tituloJuego, double precio, List<GeneroJuego> generoJuego, String plataformaJuego);
 
     // Aplicar Precio Abstracto
     public abstract double aplicarPrecio();
@@ -85,16 +86,16 @@ public abstract class Videojuego implements IntVideojuego {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Videojuego that = (Videojuego) o;
-        return Double.compare(precio, that.precio) == 0 && Objects.equals(titulo, that.titulo) && Objects.equals(genero, that.genero) && Objects.equals(consola, that.consola);
+        return Double.compare(precio, that.precio) == 0 && Objects.equals(tituloJuego, that.tituloJuego) && Objects.equals(generoJuego, that.generoJuego) && Objects.equals(plataformaJuego, that.plataformaJuego);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(titulo, precio, genero, consola);
+        return Objects.hash(tituloJuego, precio, generoJuego, plataformaJuego);
     }
 
     @Override
     public String toString() {
-        return String.format("%-23s %-25s %-29s %.2f€", this.titulo, this.genero, this.consola, aplicarPrecio());
+        return String.format(Locale.ENGLISH, "%s%n %-23s %-25s %-29s %.2f€", Menus.MNU_VIDEOJUEGOS, this.tituloJuego, this.generoJuego, this.plataformaJuego, this.precio);
     }
 }

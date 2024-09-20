@@ -1,4 +1,8 @@
-package VideoJuego;
+package videojuego;
+
+import enums.PlataformaJuego;
+import enums.GeneroJuego;
+import enums.TituloJuego;
 
 import java.util.List;
 import java.util.Objects;
@@ -43,12 +47,12 @@ public class VideojuegoFisico extends Videojuego {
 
     // Overrides -> Padre
     @Override
-    public void videojuego(EnumsJuego.Titulo titulo, double precio, List<EnumsJuego.Genero> genero, List<EnumsJuego.Consola> tipo) {
+    public void videojuego(TituloJuego tituloJuego, double precio, List<GeneroJuego> generoJuego, String plataformaJuego) {
     }
 
     // Overrides -> Aplicar Envio
     @Override
     public double aplicarPrecio() {
-        return this.precio + envio;
+        return this.getPrecio() + envio;
     }
 }

@@ -10,13 +10,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-public class PlayStation implements Consola {
+public class NintendoSwitch implements Consola {
     // Atributos
     private List<String> juegos;
 
     // Constructor
-    public PlayStation() {
-        juegos = new ArrayList<>();
+    public NintendoSwitch() {
+        setJuegos(new ArrayList<>());
     }
 
     // Getters y Setters
@@ -33,7 +33,7 @@ public class PlayStation implements Consola {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        PlayStation that = (PlayStation) o;
+        NintendoSwitch that = (NintendoSwitch) o;
         return Objects.equals(juegos, that.juegos);
     }
 
