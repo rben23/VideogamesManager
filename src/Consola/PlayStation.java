@@ -5,6 +5,7 @@ import excepciones.JuegoYaInstalado;
 import menus.Menus;
 import videojuego.Videojuego;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -67,7 +68,8 @@ public class PlayStation implements Consola {
     }
 
     @Override
-    public void switchOff() {
+    public void switchOff() throws IOException {
+        guardar();
         System.out.printf("(i) Apagando %s ...%n", getClass().getSimpleName());
     }
 
@@ -92,5 +94,10 @@ public class PlayStation implements Consola {
     @Override
     public String getPlataforma() {
         return getClass().getSimpleName();
+    }
+
+    public void guardar() throws IOException {
+        ManejarInfo manejarInfo = new ManejarInfo();
+        manejarInfo.guardarInfo("instaladosPlayStation.csv", juegos);
     }
 }

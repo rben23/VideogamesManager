@@ -1,3 +1,4 @@
+import consola.PlayStation;
 import consola.Xbox;
 import enums.GeneroJuego;
 import enums.PlataformaJuego;
@@ -7,6 +8,7 @@ import excepciones.JuegoYaInstalado;
 import videojuego.VideojuegoDigital;
 import videojuego.VideojuegoFisico;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -14,7 +16,7 @@ import java.util.List;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
 
-    public static void main(String[] args) throws JuegoYaInstalado, JuegoNoCompatible {
+    public static void main(String[] args) throws JuegoYaInstalado, JuegoNoCompatible, IOException {
         // Videojuego Digital
         VideojuegoDigital juegoDigital = new VideojuegoDigital();
         List<GeneroJuego> generoJuegoDigital = Arrays.asList(GeneroJuego.Shooter, GeneroJuego.Estrategia);
@@ -40,18 +42,17 @@ public class Main {
         List<GeneroJuego> generoJuegoFisico2 = Arrays.asList(GeneroJuego.Acción, GeneroJuego.Aventura);
         List<PlataformaJuego> plataformaJuegoFisico2 = Arrays.asList(PlataformaJuego.NintendoSwitch);
 
-        juegoFisico2.setTitulo(TituloJuego.THELEGENDOFZELDA);
+        juegoFisico2.setTitulo(TituloJuego.MINECRAFT);
         juegoFisico2.setGenero(generoJuegoFisico);
-        juegoFisico2.setConsola("PlayStation");
+        juegoFisico2.setConsola("Xbox");
         juegoFisico2.setPrecio(45.85);
 
         // PlayStation
         Xbox xbox = new Xbox();
-        xbox.installVideogame(juegoDigital);
-        xbox.installVideogame(juegoFisico);
+//        xbox.installVideogame(juegoDigital);
+//        xbox.installVideogame(juegoFisico);
+//        xbox.installVideogame(juegoFisico2);
         System.out.print(xbox.toString());
-        System.out.println();
-        xbox.playVideogame();
         System.out.println();
         xbox.switchOff();
     }
