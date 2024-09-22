@@ -1,8 +1,8 @@
 package videojuego;
 
-import enums.GeneroJuego;
-import enums.TituloJuego;
-import menus.Menus;
+import videojuego.enums.GeneroJuego;
+import videojuego.enums.TituloJuego;
+import recursos.Mensajes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +10,7 @@ import java.util.Locale;
 import java.util.Objects;
 
 
-public abstract class Videojuego implements IntVideojuego {
+public abstract class Videojuego implements Ivideojuego {
 
     // Atributos
     private TituloJuego tituloJuego;
@@ -96,6 +96,6 @@ public abstract class Videojuego implements IntVideojuego {
 
     @Override
     public String toString() {
-        return String.format(Locale.ENGLISH, "%s%n %-23s %-25s %-29s %.2f€", Menus.MNU_VIDEOJUEGOS, this.tituloJuego, this.generoJuego, this.plataformaJuego, this.precio);
+        return String.format(Locale.ENGLISH, "%s%n %-23s %-25s %-29s %.2f€", Mensajes.MNU_VDJ_VIDEOJUEGOS, this.tituloJuego, this.generoJuego, this.plataformaJuego, this.precio);
     }
 }

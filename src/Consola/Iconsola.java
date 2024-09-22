@@ -6,10 +6,10 @@ import videojuego.Videojuego;
 
 import java.io.IOException;
 
-public interface Consola {
+public interface Iconsola {
     void switchOn() throws IOException;
     void switchOff() throws IOException;
     void installVideogame(Videojuego videojuego) throws JuegoNoCompatible, JuegoYaInstalado, IOException;
     void playVideogame();
-    String getPlataforma();
+    String getPlataform();
 }

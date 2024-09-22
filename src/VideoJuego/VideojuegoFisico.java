@@ -1,8 +1,7 @@
 package videojuego;
 
-import enums.PlataformaJuego;
-import enums.GeneroJuego;
-import enums.TituloJuego;
+import videojuego.enums.GeneroJuego;
+import videojuego.enums.TituloJuego;
 
 import java.util.List;
 import java.util.Objects;

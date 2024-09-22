@@ -1,4 +1,4 @@
-package enums;
+package videojuego.enums;
 
 // Array Enum
 public enum TituloJuego {

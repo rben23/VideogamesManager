@@ -1,8 +1,9 @@
 package consola;
 
+import consola.guardarInfo.GuardarInfo;
 import excepciones.JuegoNoCompatible;
 import excepciones.JuegoYaInstalado;
-import menus.Menus;
+import recursos.Mensajes;
 import videojuego.Videojuego;
 
 import java.io.IOException;
@@ -11,22 +12,58 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-public class NintendoSwitch implements Consola {
+public class NintendoSwitch implements Iconsola {
     // Atributos
     private List<String> juegos;
 
     // Constructor
     public NintendoSwitch() {
-        setJuegos(new ArrayList<>());
+        juegos = new ArrayList<>();
     }
 
-    // Getters y Setters
-    public List<String> getJuegos() {
-        return juegos;
-    }
-
+    // Setter
     public void setJuegos(List<String> juegos) {
         this.juegos = juegos;
+    }
+
+    // Cargar info
+    private void uploadData() throws IOException {
+        juegos.clear();
+        GuardarInfo guardarInfo = new GuardarInfo();
+        guardarInfo.cargarInfo("instaladosNintendo.csv", juegos);
+    }
+
+    // Guardar info
+    private void saveData() throws IOException {
+        GuardarInfo guardarInfo = new GuardarInfo();
+        guardarInfo.guardarInfo("instaladosNintendo.csv", juegos);
+    }
+
+    // Ordenar Información
+    private String orderData() {
+        // Inicializar retorno
+        String retorno;
+
+        // Inicializar StringBuilder
+        StringBuilder stringBuilder = new StringBuilder(String.format("%s", Mensajes.MNU_CON_INSTALADOS));
+
+        // Decisión Vacio
+        if (juegos.isEmpty()) {
+            retorno = stringBuilder + Mensajes.MSG_CON_BIBLIOVACIA;
+        } else {
+            int contador = 0;
+            for (String j : juegos) {
+                stringBuilder.append(j);
+                if (contador % 2 == 0) {
+                    stringBuilder.append("\n");
+                } else {
+                    stringBuilder.append("\s");
+                }
+                contador++;
+            }
+            retorno = stringBuilder.toString();
+        }
+        return retorno;
     }
 
     // Overrides
@@ -43,41 +80,38 @@ public class NintendoSwitch implements Consola {
         return Objects.hashCode(juegos);
     }
 
+    // Overrides -> toString
     @Override
     public String toString() {
         switchOn();
-        StringBuilder stringBuilder = new StringBuilder(String.format("%s", Menus.MNU_JUEGOS_INSTALADOS));
-
-        int contador = 1;
-        for (String j : juegos) {
-            stringBuilder.append(j);
-            if (contador % 2 == 0) {
-                stringBuilder.append("\n");
-            } else {
-                stringBuilder.append("\s");
-            }
-            contador++;
-        }
-        return stringBuilder.toString();
+        return orderData();
     }
 
-    // Overrides - Funcion
+    // Overrides -> SwitchOn
     @Override
     public void switchOn() {
-        System.out.printf("(i) Iniciando %s ...%n", getClass().getSimpleName());
+        System.out.printf(Mensajes.MNU_CON_INICIO, getPlataform(), getPlataform());
+
+        try {
+            uploadData();
+        } catch (IOException e) {
+            System.out.println("ERROR: " + e.getMessage());
+        }
     }
 
+    // Overrides -> SwitchOff
     @Override
     public void switchOff() throws IOException {
-        guardar();
-        System.out.printf("(i) Apagando %s ...%n", getClass().getSimpleName());
+        System.out.printf(Mensajes.MSG_CON_FIN, getPlataform());
     }
 
+    // Overrides -> Instalar Juegos
     @Override
-    public void installVideogame(Videojuego videojuego) throws JuegoNoCompatible, JuegoYaInstalado {
+    public void installVideogame(Videojuego videojuego) throws JuegoNoCompatible, JuegoYaInstalado, IOException {
         if (!juegos.contains(videojuego.getTitulo())) {
             if (videojuego.getPlataformaJuego().equals(getClass().getSimpleName())) {
                 juegos.addAll(Arrays.asList(videojuego.getTitulo(), videojuego.getGenero().toString()));
+                saveData();
             } else {
                 throw new JuegoNoCompatible(getClass().getSimpleName());
             }
@@ -86,18 +120,20 @@ public class NintendoSwitch implements Consola {
         }
     }
 
+    // Overrides -> Jugar Juegos
     @Override
     public void playVideogame() {
-        System.out.printf("(i) Jugando a %s%n", juegos.getFirst());
+        if (!juegos.isEmpty()) {
+            System.out.printf(Mensajes.MSG_CON_JUGANDO, juegos.getFirst());
+        } else {
+            System.out.println(Mensajes.MSG_CON_BIBLIOVACIA);
+        }
     }
 
+    // Overrides -> Devolver plataforma
     @Override
-    public String getPlataforma() {
-        return getClass().getSimpleName();
-    }
+    public String getPlataform() {
 
-    public void guardar() throws IOException {
-        ManejarInfo manejarInfo = new ManejarInfo();
-        manejarInfo.guardarInfo("instaladosNintendo.csv", juegos);
+        return getClass().getSimpleName();
     }
 }

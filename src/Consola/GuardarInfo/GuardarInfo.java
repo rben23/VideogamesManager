@@ -1,13 +1,15 @@
-package consola;
+package consola.guardarInfo;
+
+import excepciones.BibliotecaVacia;
+import recursos.Mensajes;
 
 import java.io.*;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static java.util.Arrays.*;
-
-public class ManejarInfo {
+public class GuardarInfo {
     // Guardar en CSV
     public void guardarInfo(String dir, List<String> juego) throws IOException {
         FileWriter fl = new FileWriter(dir);
@@ -25,16 +27,16 @@ public class ManejarInfo {
     }
 
     // Cargar desde CSV
-    public List<String> cargarInfo(String dir) {
+    public void cargarInfo(String dir, List<String> juego) {
         String[] info = null;
         try {
             BufferedReader bf = new BufferedReader(new FileReader(dir));
             String linea;
             do {
                 linea = bf.readLine();
-                if (linea != null) {
-                    info = linea.split("\n");
 
+                if (linea != null) {
+                    juego.addAll(List.of(linea.split("\n")));
                 }
 
             } while (linea != null);
@@ -42,8 +44,7 @@ public class ManejarInfo {
         } catch (FileNotFoundException e) {
             System.out.println("(!) ERROR al cargar el fichero");
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            e.getMessage();
         }
-        return Arrays.asList(info);
     }
 }

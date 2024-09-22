@@ -1,11 +1,10 @@
 package videojuego;
 
-import enums.PlataformaJuego;
-import enums.GeneroJuego;
-import enums.TituloJuego;
+import videojuego.enums.GeneroJuego;
+import videojuego.enums.TituloJuego;
 
 import java.util.List;
 
-public interface IntVideojuego {
+public interface Ivideojuego {
     void videojuego(TituloJuego tituloJuego, double precio, List<GeneroJuego> generoJuego, String plataformaJuego);
 }

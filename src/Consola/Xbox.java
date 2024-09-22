@@ -1,8 +1,9 @@
 package consola;
 
+import consola.guardarInfo.GuardarInfo;
 import excepciones.JuegoNoCompatible;
 import excepciones.JuegoYaInstalado;
-import menus.Menus;
+import recursos.Mensajes;
 import videojuego.Videojuego;
 
 import java.io.IOException;
@@ -11,22 +12,58 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-public class Xbox implements Consola {
+public class Xbox implements Iconsola {
     // Atributos
     private List<String> juegos;
 
     // Constructor
     public Xbox() {
-        setJuegos(new ArrayList<>());
+        juegos = new ArrayList<>();
     }
 
-    // Getters y Setters
-    public List<String> getJuegos() {
-        return juegos;
-    }
-
+    // Setter
     public void setJuegos(List<String> juegos) {
         this.juegos = juegos;
+    }
+
+    // Cargar info
+    private void uploadData() throws IOException {
+        juegos.clear();
+        GuardarInfo guardarInfo = new GuardarInfo();
+        guardarInfo.cargarInfo("instaladosXbox.csv", juegos);
+    }
+
+    // Guardar info
+    private void saveData() throws IOException {
+        GuardarInfo guardarInfo = new GuardarInfo();
+        guardarInfo.guardarInfo("instaladosXbox.csv", juegos);
+    }
+
+    // Ordenar Información
+    private String orderData() {
+        // Inicializar retorno
+        String retorno;
+
+        // Inicializar StringBuilder
+        StringBuilder stringBuilder = new StringBuilder(String.format("%s", Mensajes.MNU_CON_INSTALADOS));
+
+        // Decisión Vacio
+        if (juegos.isEmpty()) {
+            retorno = stringBuilder + Mensajes.MSG_CON_BIBLIOVACIA;
+        } else {
+            int contador = 0;
+            for (String j : juegos) {
+                stringBuilder.append(j);
+                if (contador % 2 == 0) {
+                    stringBuilder.append("\n");
+                } else {
+                    stringBuilder.append("\s");
+                }
+                contador++;
+            }
+            retorno = stringBuilder.toString();
+        }
+        return retorno;
     }
 
     // Overrides
@@ -43,90 +80,58 @@ public class Xbox implements Consola {
         return Objects.hashCode(juegos);
     }
 
+    // Overrides -> toString
     @Override
     public String toString() {
-        // Encender Sistema
         switchOn();
-
-        // Inicializar retorno
-        String retorno;
-
-        // Inicializar StringBuilder
-        StringBuilder stringBuilder = new StringBuilder(String.format("%s", Menus.MNU_JUEGOS_INSTALADOS));
-
-        // Decisión Vacio
-        if (juegos.isEmpty()) {
-            retorno = stringBuilder + "(!) Biblioteca vacia";
-        } else {
-            int contador = 1;
-            for (String j : juegos) {
-                stringBuilder.append(j);
-                if (contador % 2 == 0) {
-                    stringBuilder.append("\n");
-                } else {
-                    stringBuilder.append("\s");
-                }
-                contador++;
-            }
-            retorno = stringBuilder.toString();
-        }
-        return retorno;
+        return orderData();
     }
 
-    // Overrides - Función
+    // Overrides -> SwitchOn
     @Override
     public void switchOn() {
-        System.out.printf("(i) Iniciando %s ...%n", getClass().getSimpleName());
+        System.out.printf(Mensajes.MNU_CON_INICIO, getPlataform(), getPlataform());
 
         try {
-            cargar();
+            uploadData();
         } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 
+    // Overrides -> SwitchOff
     @Override
-    public void switchOff() throws IOException {
-        System.out.printf("(i) Apagando %s ...%n", getClass().getSimpleName());
+    public void switchOff() {
+        System.out.printf(Mensajes.MSG_CON_FIN, getPlataform());
     }
 
+    // Overrides -> Instalar Juegos
     @Override
     public void installVideogame(Videojuego videojuego) throws JuegoNoCompatible, JuegoYaInstalado, IOException {
         if (!juegos.contains(videojuego.getTitulo())) {
-            if (videojuego.getPlataformaJuego().equals(getClass().getSimpleName())) {
+            if (videojuego.getPlataformaJuego().equals(getPlataform())) {
                 juegos.addAll(Arrays.asList(videojuego.getTitulo(), videojuego.getGenero().toString()));
-                guardar();
+                saveData();
             } else {
-                throw new JuegoNoCompatible(getClass().getSimpleName());
+                throw new JuegoNoCompatible(getPlataform());
             }
         } else {
             throw new JuegoYaInstalado();
         }
     }
 
+    // Overrides -> Jugar Juegos
     @Override
     public void playVideogame() {
         if (!juegos.isEmpty()) {
-            System.out.printf("(i) Jugando a %s%n", juegos.getFirst());
+            System.out.printf(Mensajes.MSG_CON_JUGANDO, juegos.getFirst());
         } else {
-            System.out.println("(!) No tienes juegos instalados");
+            System.out.println(Mensajes.MSG_CON_BIBLIOVACIA);
         }
     }
 
+    // Overrides -> Devolver plataforma
     @Override
-    public String getPlataforma() {
+    public String getPlataform() {
         return getClass().getSimpleName();
-    }
-
-    // Cargar info
-    public void cargar() throws IOException {
-        ManejarInfo manejarInfo = new ManejarInfo();
-        juegos.addAll(manejarInfo.cargarInfo("src/instaladosXbox.csv"));
-    }
-
-    // Guardar info
-    public void guardar() throws IOException {
-        ManejarInfo manejarInfo = new ManejarInfo();
-        manejarInfo.guardarInfo("instaladosXbox.csv", juegos);
     }
 }
