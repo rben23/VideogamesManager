@@ -1,6 +1,6 @@
 package consola;
 
-import consola.guardarInfo.GuardarInfo;
+import consola.GuardarInfo.GuardarInfo;
 import excepciones.JuegoNoCompatible;
 import excepciones.JuegoYaInstalado;
 import recursos.Mensajes;

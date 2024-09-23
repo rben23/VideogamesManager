@@ -36,9 +36,12 @@ public class Main {
 
         // Inicializar Consola Nintendo
         NintendoSwitch play = new NintendoSwitch();
-        play.installVideogame(vd);
-        play.installVideogame(vf);
-        System.out.print(play.toString());
-        System.out.println();
+        play.switchOn();
+//        play.installVideogame(vd);
+//        play.installVideogame(vf);
+        System.out.println("---");
+        play.playVideogame();
+        System.out.println("---");
+        play.switchOff();
     }
 }

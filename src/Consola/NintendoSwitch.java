@@ -1,10 +1,12 @@
 package consola;
 
-import consola.guardarInfo.GuardarInfo;
+import consola.GuardarInfo.GuardarInfo;
 import excepciones.JuegoNoCompatible;
 import excepciones.JuegoYaInstalado;
 import recursos.Mensajes;
 import videojuego.Videojuego;
+import videojuego.VideojuegoDigital;
+import videojuego.VideojuegoFisico;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -28,7 +30,6 @@ public class NintendoSwitch implements Iconsola {
 
     // Cargar info
     private void uploadData() throws IOException {
-        juegos.clear();
         GuardarInfo guardarInfo = new GuardarInfo();
         guardarInfo.cargarInfo("instaladosNintendo.csv", juegos);
     }
@@ -40,7 +41,7 @@ public class NintendoSwitch implements Iconsola {
     }
 
     // Ordenar Información
-    private String orderData() {
+    private void orderData() {
         // Inicializar retorno
         String retorno;
 
@@ -63,7 +64,7 @@ public class NintendoSwitch implements Iconsola {
             }
             retorno = stringBuilder.toString();
         }
-        return retorno;
+        System.out.println(retorno);
     }
 
     // Overrides
@@ -80,13 +81,6 @@ public class NintendoSwitch implements Iconsola {
         return Objects.hashCode(juegos);
     }
 
-    // Overrides -> toString
-    @Override
-    public String toString() {
-        switchOn();
-        return orderData();
-    }
-
     // Overrides -> SwitchOn
     @Override
     public void switchOn() {
@@ -97,6 +91,7 @@ public class NintendoSwitch implements Iconsola {
         } catch (IOException e) {
             System.out.println("ERROR: " + e.getMessage());
         }
+        orderData();
     }
 
     // Overrides -> SwitchOff
@@ -133,7 +128,6 @@ public class NintendoSwitch implements Iconsola {
     // Overrides -> Devolver plataforma
     @Override
     public String getPlataform() {
-
         return getClass().getSimpleName();
     }
 }

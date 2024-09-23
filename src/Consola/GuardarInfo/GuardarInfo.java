@@ -1,4 +1,4 @@
-package consola.guardarInfo;
+package consola.GuardarInfo;
 
 import excepciones.BibliotecaVacia;
 import recursos.Mensajes;
@@ -22,13 +22,11 @@ public class GuardarInfo {
             }
             contador++;
         }
-
         fl.close();
     }
 
     // Cargar desde CSV
     public void cargarInfo(String dir, List<String> juego) {
-        String[] info = null;
         try {
             BufferedReader bf = new BufferedReader(new FileReader(dir));
             String linea;
@@ -36,9 +34,8 @@ public class GuardarInfo {
                 linea = bf.readLine();
 
                 if (linea != null) {
-                    juego.addAll(List.of(linea.split("\n")));
+                    juego.addAll(Arrays.asList(linea.split("\n")));
                 }
-
             } while (linea != null);
 
         } catch (FileNotFoundException e) {
