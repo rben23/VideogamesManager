@@ -23,7 +23,7 @@ public class Main {
         List<GeneroJuego> generoJuego = Arrays.asList(GeneroJuego.Aventura, GeneroJuego.Acción);
         vd.setTitulo(TituloJuego.MINECRAFT);
         vd.setGenero(generoJuego);
-        vd.setConsola("NintendoSwitch");
+        vd.setConsola("Xbox");
         vd.setPrecio(25.99);
 
         // Inicializar Juego Físico
@@ -31,14 +31,14 @@ public class Main {
         List<GeneroJuego> generoJuego2 = Arrays.asList(GeneroJuego.Misterio, GeneroJuego.Estrategia);
         vf.setTitulo(TituloJuego.AMONGUS);
         vf.setGenero(generoJuego2);
-        vf.setConsola("NintendoSwitch");
+        vf.setConsola("Xbox");
         vf.setPrecio(25.99);
 
         // Inicializar Consola Nintendo
-        NintendoSwitch play = new NintendoSwitch();
+        Xbox play = new Xbox();
         play.switchOn();
-//        play.installVideogame(vd);
-//        play.installVideogame(vf);
+        play.installVideogame(vd);
+        play.installVideogame(vf);
         System.out.println("---");
         play.playVideogame();
         System.out.println("---");

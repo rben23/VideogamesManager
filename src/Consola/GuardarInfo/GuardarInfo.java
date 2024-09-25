@@ -1,4 +1,4 @@
-package consola.GuardarInfo;
+package consola.guardarInfo;
 
 import excepciones.BibliotecaVacia;
 import recursos.Mensajes;
@@ -13,12 +13,12 @@ public class GuardarInfo {
     // Guardar en CSV
     public void guardarInfo(String dir, List<String> juego) throws IOException {
         FileWriter fl = new FileWriter(dir);
-        int contador = 1;
+        int contador = 0;
         for (String j : juego) {
-            if (contador % 2 == 0) {
-                fl.write(j + "\n");
+            if (contador == 2) {
+                fl.write(j + "," + "\n");
             } else {
-                fl.write(j + "\s");
+                fl.write(j + ",");
             }
             contador++;
         }
@@ -34,7 +34,7 @@ public class GuardarInfo {
                 linea = bf.readLine();
 
                 if (linea != null) {
-                    juego.addAll(Arrays.asList(linea.split("\n")));
+                    juego.addAll(Arrays.asList(linea.split(",")));
                 }
             } while (linea != null);
 

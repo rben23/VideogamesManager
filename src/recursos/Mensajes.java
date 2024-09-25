@@ -24,10 +24,18 @@ public class Mensajes {
 
     // Mensaje Consolas -> Jugando juego
     public static final String MSG_CON_JUGANDO = "🎮 Jugando a %s%n";
+    public static final String MSG_CON_NOJUEGO = "❗ Instala un juego para poder jugar";
+
+    // Mensaje Consolas -> Juego instalado
+    public static final String MNU_CON_INSTALADO
+            = """
+            ---
+            📥 Descargado %s
+            ---\n""";
 
     // Menú Consolas -> Juegos instalados
     public static final String MNU_CON_INSTALADOS
             = """
-            📥 Biblioteca de Juegos
+            📂 Biblioteca de Juegos
             -----------------------------------------\n""";
 }
