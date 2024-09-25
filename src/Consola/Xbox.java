@@ -89,10 +89,11 @@ public class Xbox implements Iconsola {
             retorno = stringBuilder + Mensajes.MSG_CON_BIBLIOVACIA;
         } else {
             // Estructurar salida
-            int contador = 0;
+            int contador = 1;
             for (String j : juegos) {
                 stringBuilder.append(j);
-                if (contador == 2) {
+
+                if (contador % 2 == 0) {
                     stringBuilder.append("\n");
                 } else {
                     stringBuilder.append("\s");

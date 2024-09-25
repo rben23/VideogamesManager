@@ -13,10 +13,10 @@ public class GuardarInfo {
     // Guardar en CSV
     public void guardarInfo(String dir, List<String> juego) throws IOException {
         FileWriter fl = new FileWriter(dir);
-        int contador = 0;
+        int contador = 1;
         for (String j : juego) {
-            if (contador == 2) {
-                fl.write(j + "," + "\n");
+            if (contador % 2 == 0) {
+                fl.write(j + "." + "\n");
             } else {
                 fl.write(j + ",");
             }
@@ -34,7 +34,7 @@ public class GuardarInfo {
                 linea = bf.readLine();
 
                 if (linea != null) {
-                    juego.addAll(Arrays.asList(linea.split(",")));
+                    juego.addAll(Arrays.asList(linea.split(".")));
                 }
             } while (linea != null);
 
