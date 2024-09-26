@@ -25,6 +25,7 @@ public class Mensajes {
     // Mensaje Consolas -> Jugando juego
     public static final String MSG_CON_JUGANDO = "🎮 Jugando a %s%n";
     public static final String MSG_CON_NOJUEGO = "❗ Instala un juego para poder jugar";
+    public static final String MSG_CON_ERRFICHERO = "❌ ERROR al cargar el fichero";
 
     // Mensaje Consolas -> Juego instalado
     public static final String MNU_CON_INSTALADO

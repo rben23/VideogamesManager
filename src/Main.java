@@ -1,12 +1,11 @@
-import consola.NintendoSwitch;
-import consola.PlayStation;
 import consola.Xbox;
 import excepciones.JuegoNoCompatible;
 import excepciones.JuegoYaInstalado;
-import videojuego.Videojuego;
 import videojuego.VideojuegoDigital;
 import videojuego.VideojuegoFisico;
 import videojuego.enums.GeneroJuego;
+import videojuego.enums.PlataformaJuego;
+import videojuego.enums.TipoJuego;
 import videojuego.enums.TituloJuego;
 
 import java.io.IOException;
@@ -19,20 +18,11 @@ public class Main {
 
     public static void main(String[] args) throws JuegoYaInstalado, JuegoNoCompatible, IOException {
         // Inicializar Juego Digital
-        VideojuegoDigital vd = new VideojuegoDigital();
         List<GeneroJuego> generoJuego = Arrays.asList(GeneroJuego.Aventura, GeneroJuego.Acción);
-        vd.setTitulo(TituloJuego.MINECRAFT);
-        vd.setGenero(generoJuego);
-        vd.setConsola("Xbox");
-        vd.setPrecio(25.99);
-
+        VideojuegoDigital vd = new VideojuegoDigital(TituloJuego.MINECRAFT, 25.95, PlataformaJuego.Xbox, generoJuego, TipoJuego.DIGITAL);
         // Inicializar Juego Físico
-        VideojuegoFisico vf = new VideojuegoFisico();
         List<GeneroJuego> generoJuego2 = Arrays.asList(GeneroJuego.Misterio, GeneroJuego.Estrategia);
-        vf.setTitulo(TituloJuego.AMONGUS);
-        vf.setGenero(generoJuego2);
-        vf.setConsola("Xbox");
-        vf.setPrecio(25.99);
+        VideojuegoFisico vf = new VideojuegoFisico(TituloJuego.AMONGUS, 27.98, PlataformaJuego.Xbox, generoJuego, TipoJuego.FISICO);
 
         // Inicializar Consola Nintendo
         Xbox play = new Xbox();

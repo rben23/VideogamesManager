@@ -1,6 +1,6 @@
 package consola;
 
-import consola.guardarInfo.GuardarInfo;
+import consola.GuardarInfo.GuardarInfo;
 import excepciones.JuegoNoCompatible;
 import excepciones.JuegoYaInstalado;
 import recursos.Mensajes;
@@ -14,7 +14,7 @@ import java.util.Objects;
 
 public class Xbox implements Iconsola {
     // Atributos
-    private List<String> juegos;
+    private List<Videojuego> juegos;
 
     // Constructor
     public Xbox() {
@@ -22,7 +22,7 @@ public class Xbox implements Iconsola {
     }
 
     // Setter
-    public void setJuegos(List<String> juegos) {
+    public void setJuegos(List<Videojuego> juegos) {
         this.juegos = juegos;
     }
 
@@ -90,7 +90,7 @@ public class Xbox implements Iconsola {
         } else {
             // Estructurar salida
             int contador = 1;
-            for (String j : juegos) {
+            for (Videojuego j : juegos) {
                 stringBuilder.append(j);
 
                 if (contador % 2 == 0) {
@@ -117,7 +117,6 @@ public class Xbox implements Iconsola {
             // Decisión Plataforma compatible
             if (videojuego.getPlataformaJuego().equals(getClass().getSimpleName())) {
                 // Videojuego -> Fichero
-                juegos.addAll(Arrays.asList(videojuego.getTitulo(), videojuego.getGenero().toString()));
                 saveData();
 
                 // Mensaje juego instalado

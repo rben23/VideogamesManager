@@ -1,6 +1,6 @@
 package consola;
 
-import consola.guardarInfo.GuardarInfo;
+import consola.GuardarInfo.GuardarInfo;
 import excepciones.JuegoNoCompatible;
 import excepciones.JuegoYaInstalado;
 import recursos.Mensajes;
@@ -14,7 +14,7 @@ import java.util.Objects;
 
 public class PlayStation implements Iconsola {
     // Atributos
-    private List<String> juegos;
+    private List<Videojuego> juegos;
 
     // Constructor
     public PlayStation() {
@@ -22,7 +22,7 @@ public class PlayStation implements Iconsola {
     }
 
     // Setter
-    public void setJuegos(List<String> juegos) {
+    public void setJuegos(List<Videojuego> juegos) {
         this.juegos = juegos;
     }
 
@@ -90,7 +90,7 @@ public class PlayStation implements Iconsola {
         } else {
             // Estructurar salida
             int contador = 0;
-            for (String j : juegos) {
+            for (Videojuego j : juegos) {
                 stringBuilder.append(j);
                 if (contador == 2) {
                     stringBuilder.append("\n");
@@ -106,7 +106,6 @@ public class PlayStation implements Iconsola {
         System.out.println(retorno);
     }
 
-
     // Overrides -> Instalar Juegos
     @Override
     public void installVideogame(Videojuego videojuego) throws JuegoNoCompatible, JuegoYaInstalado, IOException {
@@ -117,7 +116,6 @@ public class PlayStation implements Iconsola {
             // Decisión Plataforma compatible
             if (videojuego.getPlataformaJuego().equals(getClass().getSimpleName())) {
                 // Videojuego -> Fichero
-                juegos.addAll(Arrays.asList(videojuego.getTitulo(), videojuego.getGenero().toString()));
                 saveData();
 
                 // Mensaje juego instalado

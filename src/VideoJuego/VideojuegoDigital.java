@@ -1,6 +1,8 @@
 package videojuego;
 
 import videojuego.enums.GeneroJuego;
+import videojuego.enums.PlataformaJuego;
+import videojuego.enums.TipoJuego;
 import videojuego.enums.TituloJuego;
 
 import java.util.List;
@@ -11,12 +13,14 @@ public class VideojuegoDigital extends Videojuego {
     private int descueto;
 
     // Constructor Predeterminado
-    public VideojuegoDigital() {
-        descueto = 10;
+    public VideojuegoDigital(TituloJuego titulo, double precio, PlataformaJuego plataforma, List<GeneroJuego> genero, TipoJuego tipo) {
+        super(titulo, precio, plataforma, genero, tipo);
+        this.descueto = 10;
     }
 
     // Constructor Parametrizado
-    public VideojuegoDigital(int cantDesc) {
+    public VideojuegoDigital(TituloJuego titulo, double precio, PlataformaJuego plataforma, List<GeneroJuego> genero, TipoJuego tipo, int cantDesc) {
+        super(titulo, precio, plataforma, genero, tipo);
         this.descueto = cantDesc;
     }
 
@@ -31,10 +35,9 @@ public class VideojuegoDigital extends Videojuego {
 
     // Overrides -> Padre
     @Override
-    public void videojuego(TituloJuego tituloJuego, double precio, List<GeneroJuego> generoJuego, String plataformaJuego) {
+    public void videojuego(TituloJuego tituloJuego, double precio, List<GeneroJuego> generoJuego, PlataformaJuego plataformaJuego, TipoJuego tipoJuego) {
 
     }
-
 
     // Overrides -> Aplicar Descuento
     @Override
@@ -60,5 +63,10 @@ public class VideojuegoDigital extends Videojuego {
     @Override
     public String toString() {
         return String.format("%s", super.toString());
+    }
+
+    @Override
+    public void videojuego(TituloJuego tituloJuego, double precio, List<GeneroJuego> generoJuego, String plataformaJuego, TipoJuego tipoJuego) {
+
     }
 }

@@ -1,6 +1,8 @@
 package videojuego;
 
 import videojuego.enums.GeneroJuego;
+import videojuego.enums.PlataformaJuego;
+import videojuego.enums.TipoJuego;
 import videojuego.enums.TituloJuego;
 
 import java.util.List;
@@ -11,13 +13,15 @@ public class VideojuegoFisico extends Videojuego {
     private double envio;
 
     // Constructor Predeterminado
-    public VideojuegoFisico() {
-        setEnvio(10);
+    public VideojuegoFisico(TituloJuego titulo, double precio, PlataformaJuego plataforma, List<GeneroJuego> genero, TipoJuego tipo) {
+        super(titulo, precio, plataforma, genero, tipo);
+        this.envio = 10;
     }
 
     // Constructor Paraetrizado
-    public VideojuegoFisico(double envio) {
-        this.setEnvio(envio);
+    public VideojuegoFisico(TituloJuego titulo, double precio, PlataformaJuego plataforma, List<GeneroJuego> genero, TipoJuego tipo, double envio) {
+        super(titulo, precio, plataforma, genero, tipo);
+        this.envio = envio;
     }
 
     // Setters y Getters
@@ -46,12 +50,17 @@ public class VideojuegoFisico extends Videojuego {
 
     // Overrides -> Padre
     @Override
-    public void videojuego(TituloJuego tituloJuego, double precio, List<GeneroJuego> generoJuego, String plataformaJuego) {
+    public void videojuego(TituloJuego tituloJuego, double precio, List<GeneroJuego> generoJuego, PlataformaJuego plataformaJuego, TipoJuego tipoJuego) {
     }
 
     // Overrides -> Aplicar Envio
     @Override
     public double aplicarPrecio() {
         return this.getPrecio() + envio;
+    }
+
+    @Override
+    public void videojuego(TituloJuego tituloJuego, double precio, List<GeneroJuego> generoJuego, String plataformaJuego, TipoJuego tipoJuego) {
+
     }
 }

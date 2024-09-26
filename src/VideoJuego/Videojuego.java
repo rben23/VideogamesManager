@@ -1,6 +1,8 @@
 package videojuego;
 
 import videojuego.enums.GeneroJuego;
+import videojuego.enums.PlataformaJuego;
+import videojuego.enums.TipoJuego;
 import videojuego.enums.TituloJuego;
 import recursos.Mensajes;
 
@@ -16,22 +18,16 @@ public abstract class Videojuego implements Ivideojuego {
     private TituloJuego tituloJuego;
     private double precio;
     private List<GeneroJuego> generoJuego;
-    private String plataformaJuego;
-
-    // Constructor Predeterminado
-    public Videojuego() {
-        this.tituloJuego = tituloJuego.AMONGUS;
-        this.precio = 0.0;
-        this.generoJuego = new ArrayList<>();
-        this.plataformaJuego = "Undefined";
-    }
+    private PlataformaJuego plataformaJuego;
+    private TipoJuego tipoJuego;
 
     // Constructor Parametrizado
-    public Videojuego(TituloJuego tituloJuego, double precio, String plataformaJuego) {
+    public Videojuego(TituloJuego tituloJuego, double precio, PlataformaJuego plataformaJuego, List<GeneroJuego> generoJuego, TipoJuego tipoJuego) {
         this.tituloJuego = tituloJuego;
         this.precio = precio;
-        this.generoJuego = new ArrayList<>();
+        this.generoJuego = generoJuego;
         this.plataformaJuego = plataformaJuego;
+        this.tipoJuego = tipoJuego;
     }
 
     // Setter y Getter Titulo
@@ -65,17 +61,26 @@ public abstract class Videojuego implements Ivideojuego {
         return generoJuego;
     }
 
-    // Setter y Getter Tipo
-    public void setConsola(String plataformaJuego) {
+    // Setter y Getter Plataforma
+    public void setPlataforma(PlataformaJuego plataformaJuego) {
         this.plataformaJuego = plataformaJuego;
     }
 
     public String getPlataformaJuego() {
-        return plataformaJuego;
+        return plataformaJuego.toString();
+    }
+
+    // Setter y Getter Tipo
+    public void setTipo(TipoJuego tipoJuego) {
+        this.tipoJuego = tipoJuego;
+    }
+
+    public String getTipo() {
+        return tipoJuego.toString();
     }
 
     // Overrides -> Padre
-    public abstract void videojuego(TituloJuego tituloJuego, double precio, List<GeneroJuego> generoJuego, String plataformaJuego);
+    public abstract void videojuego(TituloJuego tituloJuego, double precio, List<GeneroJuego> generoJuego, PlataformaJuego plataformaJuego, TipoJuego tipoJuego);
 
     // Aplicar Precio Abstracto
     public abstract double aplicarPrecio();
@@ -86,7 +91,10 @@ public abstract class Videojuego implements Ivideojuego {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Videojuego that = (Videojuego) o;
-        return Double.compare(precio, that.precio) == 0 && Objects.equals(tituloJuego, that.tituloJuego) && Objects.equals(generoJuego, that.generoJuego) && Objects.equals(plataformaJuego, that.plataformaJuego);
+        return Double.compare(precio, that.precio) == 0 &&
+                Objects.equals(tituloJuego, that.tituloJuego) &&
+                Objects.equals(generoJuego, that.generoJuego) &&
+                Objects.equals(plataformaJuego, that.plataformaJuego);
     }
 
     @Override
@@ -96,6 +104,8 @@ public abstract class Videojuego implements Ivideojuego {
 
     @Override
     public String toString() {
-        return String.format(Locale.ENGLISH, "%s%n %-23s %-25s %-29s %.2f€", Mensajes.MNU_VDJ_VIDEOJUEGOS, this.tituloJuego, this.generoJuego, this.plataformaJuego, this.precio);
+        return String.format(Locale.ENGLISH, "%s%n %-23s %-25s %-29s %.2f€ %s",
+                Mensajes.MNU_VDJ_VIDEOJUEGOS, this.tituloJuego, this.generoJuego,
+                this.plataformaJuego, this.precio, this.tipoJuego);
     }
 }
