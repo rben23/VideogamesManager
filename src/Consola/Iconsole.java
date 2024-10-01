@@ -2,13 +2,11 @@ package consola;
 
 import excepciones.JuegoNoCompatible;
 import excepciones.JuegoYaInstalado;
-import videojuego.Videojuego;
-import videojuego.VideojuegoDigital;
-import videojuego.VideojuegoFisico;
+import videojuego.Videogame;
 
 import java.io.IOException;
 
-public interface Iconsola {
+public interface Iconsole {
     // Encender Consola
     void switchOn() throws IOException;
 
@@ -16,7 +14,7 @@ public interface Iconsola {
     void switchOff() throws IOException;
 
     // Instalar Juegos
-    void installVideogame(Videojuego videojuego) throws JuegoNoCompatible, JuegoYaInstalado, IOException;
+    void installVideogame(Videogame videogame) throws JuegoNoCompatible, JuegoYaInstalado, IOException;
 
     // Jugar juegos
     void playVideogame();

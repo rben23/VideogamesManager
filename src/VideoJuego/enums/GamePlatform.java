@@ -1,5 +1,5 @@
 package videojuego.enums;
 
-public enum PlataformaJuego {
+public enum GamePlatform {
     PlayStation, Xbox, NintendoSwitch
 }

@@ -1,6 +1,5 @@
 package videojuego.enums;
 
-// Array Enum
-public enum TituloJuego {
+public enum GameTitle {
     AMONGUS, THELEGENDOFZELDA, MINECRAFT, CALLOFDUTY, JEDIFALLENORDER, GODOFWAR, HALO
 }
