@@ -1,11 +1,11 @@
-package consola;
+package console;
 
-import consola.guardarInfo.FileManager;
-import excepciones.JuegoNoCompatible;
-import excepciones.JuegoYaInstalado;
-import recursos.Mensajes;
-import videojuego.Videogame;
-import videojuego.enums.GamePlatform;
+import console.fileManager.FileManager;
+import exceptions.JuegoNoCompatible;
+import exceptions.JuegoYaInstalado;
+import resources.Messages;
+import videogames.Videogame;
+import videogames.enums.GamePlatform;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -37,7 +37,7 @@ public class Console implements Iconsole {
     @Override
     public void switchOn() {
         // Lanzar menú consola
-        System.out.printf(Mensajes.MNU_CON_INICIO, getPlataform(), getPlataform());
+        System.out.printf(Messages.MNU_CON_POWERON, getPlataform(), getPlataform());
 
         // Fichero -> List juegos
         try {
@@ -53,12 +53,15 @@ public class Console implements Iconsole {
     // Apagamos la consola y mostramos despedida
     @Override
     public void switchOff() {
-        System.out.printf(Mensajes.MSG_CON_FIN, getPlataform());
+        System.out.printf(Messages.MSG_CON_END, getPlataform());
     }
 
     // Ordenamos la información de la biblioteca de juegos
     private void orderData() {
-        System.out.println(Mensajes.MNU_VDJ_VIDEOJUEGOS);
+        // Mostramos cabecera
+        System.out.println(Messages.MNU_VDG_LIBRARY);
+
+        // Mostrar Lista
         for (Videogame videogame : games) {
             System.out.println(videogame);
         }
@@ -80,7 +83,7 @@ public class Console implements Iconsole {
                 saveData();
 
                 // Mensaje juego instalado
-                System.out.printf(Mensajes.MNU_CON_INSTALADO, videogame.getTitulo());
+                System.out.printf(Messages.MNU_CON_INSTALLED, videogame.getTitulo());
 
                 // Mostrar biblioteca
                 orderData();
@@ -96,10 +99,10 @@ public class Console implements Iconsole {
         // Decisión List juegos vacio
         if (!games.isEmpty()) {
             // Mensaje "Jugando a..."
-            System.out.printf(Mensajes.MSG_CON_JUGANDO, games.get(0).getTitulo());
+            System.out.printf(Messages.MSG_CON_PLAYING, games.get(0).getTitulo());
         } else {
             // Mensaje "No hay juegos"
-            System.out.println(Mensajes.MSG_CON_NOJUEGO);
+            System.out.println(Messages.MSG_CON_NOGAME);
         }
     }
 
@@ -116,11 +119,11 @@ public class Console implements Iconsole {
 
     // Decisión Dirección de Fichero
     private String selectFile() {
-        if (getPlataform().equals(GamePlatform.Xbox.toString())) {
+        if (getPlataform().equals(GamePlatform.XBOX.toString())) {
             return "instaladosXbox.csv";
         }
 
-        if (getPlataform().equals(GamePlatform.NintendoSwitch.toString())) {
+        if (getPlataform().equals(GamePlatform.NINTENDOSWITCH.toString())) {
             return "instaladosNintendo.csv";
         }
 

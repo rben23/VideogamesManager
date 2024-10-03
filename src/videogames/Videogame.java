@@ -1,9 +1,9 @@
-package videojuego;
+package videogames;
 
-import videojuego.enums.GameGenre;
-import videojuego.enums.GamePlatform;
-import videojuego.enums.GameType;
-import videojuego.enums.GameTitle;
+import videogames.enums.GameGenre;
+import videogames.enums.GamePlatform;
+import videogames.enums.GameType;
+import videogames.enums.GameTitle;
 
 import java.util.List;
 import java.util.Locale;

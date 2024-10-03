@@ -1,12 +1,12 @@
-import consola.Console;
-import excepciones.JuegoNoCompatible;
-import excepciones.JuegoYaInstalado;
-import videojuego.VideogameDigital;
-import videojuego.VideogamePhisic;
-import videojuego.enums.GameGenre;
-import videojuego.enums.GamePlatform;
-import videojuego.enums.GameType;
-import videojuego.enums.GameTitle;
+import console.Console;
+import exceptions.JuegoNoCompatible;
+import exceptions.JuegoYaInstalado;
+import videogames.VideogameDigital;
+import videogames.VideogamePhisic;
+import videogames.enums.GameGenre;
+import videogames.enums.GamePlatform;
+import videogames.enums.GameType;
+import videogames.enums.GameTitle;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -19,21 +19,22 @@ public class Main {
     public static void main(String[] args) throws JuegoYaInstalado, JuegoNoCompatible, IOException {
         // Inicializar Juego Digital
         List<GameGenre> gameGenres = Arrays.asList(GameGenre.AVENTURA, GameGenre.ACCIÓN);
-        VideogameDigital vdMinecraft = new VideogameDigital(GameTitle.MINECRAFT, 25.95, GamePlatform.Xbox,
+        VideogameDigital vdMinecraft = new VideogameDigital(GameTitle.MINECRAFT, 25.95, GamePlatform.XBOX,
                 gameGenres, GameType.DIGITAL);
 
         // Inicializar Juego Físico
         List<GameGenre> gameGenre2 = Arrays.asList(GameGenre.MISTERIO, GameGenre.ESTRATEGIA);
-        VideogamePhisic vfAmongUs = new VideogamePhisic(GameTitle.AMONGUS, 27.98, GamePlatform.Xbox,
+        VideogamePhisic vfAmongUs = new VideogamePhisic(GameTitle.AMONGUS, 27.98, GamePlatform.XBOX,
                 gameGenres, GameType.FISICO);
 
         // Inicializar Consola Nintendo
-        Console play = new Console(GamePlatform.Xbox);
+        Console play = new Console(GamePlatform.XBOX);
         play.switchOn();
         play.installVideogame(vdMinecraft);
         play.installVideogame(vfAmongUs);
         System.out.println("---");
         play.playVideogame();
+        System.out.println("---");
         play.switchOff();
     }
 }

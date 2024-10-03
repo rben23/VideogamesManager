@@ -1,13 +1,13 @@
-package consola.guardarInfo;
+package console.fileManager;
 
-import recursos.Mensajes;
-import videojuego.Videogame;
-import videojuego.VideogameDigital;
-import videojuego.VideogamePhisic;
-import videojuego.enums.GameGenre;
-import videojuego.enums.GamePlatform;
-import videojuego.enums.GameType;
-import videojuego.enums.GameTitle;
+import resources.Messages;
+import videogames.Videogame;
+import videogames.VideogameDigital;
+import videogames.VideogamePhisic;
+import videogames.enums.GameGenre;
+import videogames.enums.GamePlatform;
+import videogames.enums.GameType;
+import videogames.enums.GameTitle;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -80,7 +80,7 @@ public class FileManager {
             } while (linea != null);
 
         } catch (FileNotFoundException e) {
-            System.out.println(Mensajes.MSG_CON_ERRFICHERO);
+            System.out.println(Messages.MSG_CON_ERRORFILE);
         } catch (IOException e) {
             e.getMessage();
         }

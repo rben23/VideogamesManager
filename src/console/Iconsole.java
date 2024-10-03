@@ -1,8 +1,8 @@
-package consola;
+package console;
 
-import excepciones.JuegoNoCompatible;
-import excepciones.JuegoYaInstalado;
-import videojuego.Videogame;
+import exceptions.JuegoNoCompatible;
+import exceptions.JuegoYaInstalado;
+import videogames.Videogame;
 
 import java.io.IOException;
 

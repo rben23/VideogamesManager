@@ -1,4 +1,4 @@
-package excepciones;
+package exceptions;
 
 public class SubidaFallida extends Exception {
     public SubidaFallida() {

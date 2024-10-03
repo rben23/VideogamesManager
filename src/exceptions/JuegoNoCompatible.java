@@ -1,4 +1,4 @@
-package excepciones;
+package exceptions;
 
 public class JuegoNoCompatible extends Exception {
     public JuegoNoCompatible(String message) {

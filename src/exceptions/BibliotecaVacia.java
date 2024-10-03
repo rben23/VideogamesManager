@@ -1,6 +1,4 @@
-package excepciones;
-
-import java.io.IOException;
+package exceptions;
 
 public class BibliotecaVacia extends NullPointerException {
     public BibliotecaVacia() {
