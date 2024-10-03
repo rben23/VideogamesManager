@@ -21,4 +21,7 @@ public interface Iconsole {
 
     // Coger plataforma
     String getPlataform();
+
+    // Coger Juegos
+    String getGames();
 }

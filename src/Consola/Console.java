@@ -68,11 +68,11 @@ public class Console implements Iconsole {
     @Override
     public void installVideogame(Videogame videogame) throws JuegoNoCompatible, JuegoYaInstalado, IOException {
         // Decisión juego instalado
-        if (games.contains(videogame.getTitulo())) {
+        if (getGames().contains(videogame.getTitulo())) {
             throw new JuegoYaInstalado();
         } else {
             // Decisión Plataforma compatible
-            if (videogame.getPlataformaJuego().equals(getPlataform())) {
+            if (getPlataform().equals(videogame.getPlataformaJuego())) {
                 // Videojuego -> List Juego
                 games.add(videogame);
 
@@ -85,7 +85,7 @@ public class Console implements Iconsole {
                 // Mostrar biblioteca
                 orderData();
             } else {
-                throw new JuegoNoCompatible(getClass().getSimpleName());
+                throw new JuegoNoCompatible(getPlataform());
             }
         }
     }
@@ -107,6 +107,11 @@ public class Console implements Iconsole {
     @Override
     public String getPlataform() {
         return this.platform.toString();
+    }
+
+    @Override
+    public String getGames() {
+        return this.games.toString();
     }
 
     // Decisión Dirección de Fichero
