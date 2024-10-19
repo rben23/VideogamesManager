@@ -1,4 +1,4 @@
-package videogames.enums;
+package enums;
 
 public enum GameTitle {
     AMONGUS, THELEGENDOFZELDA, MINECRAFT, CALLOFDUTY, JEDIFALLENORDER, GODOFWAR, HALO

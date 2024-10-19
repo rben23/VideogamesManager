@@ -1,45 +1,25 @@
 package videogames;
 
-import videogames.enums.GameGenre;
-import videogames.enums.GamePlatform;
-import videogames.enums.GameType;
-import videogames.enums.GameTitle;
+import enums.GameGenre;
+import enums.GamePlatform;
+import enums.GameType;
+import enums.GameTitle;
 
 import java.util.List;
 import java.util.Objects;
 
 public class VideogameDigital extends Videogame {
-    // Atributos
-    private int discount;
 
-    // Constructor Predeterminado
+    private double discount;
+
     public VideogameDigital(GameTitle title, double price, GamePlatform platform, List<GameGenre> genre, GameType type) {
         super(title, price, platform, genre, type);
-        this.discount = 10;
+        this.discount = 15;
     }
 
-    // Constructor Parametrizado
-    public VideogameDigital(GameTitle title, double price, GamePlatform platform, List<GameGenre> genre, GameType type, int amountDiscount) {
-        super(title, price, platform, genre, type);
-        this.discount = amountDiscount;
-    }
-
-    // Setters y Getters > cantDesc
-    public int getDiscount() {
-        return discount;
-    }
-
-    public void setDiscount(int discount) {
-        this.discount = discount;
-    }
-
-    // Overrides -> Aplicar Descuento
     @Override
-    public double aplyPrice() {
-        return this.price - discount;
-    }
+    public double aplyPrice() {return this.price - discount;}
 
-    // Overrides -> Equals, HashCode, ToString
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -50,12 +30,8 @@ public class VideogameDigital extends Videogame {
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), discount);
-    }
+    public int hashCode() {return Objects.hash(super.hashCode(), discount);}
 
     @Override
-    public String toString() {
-        return String.format("%s", super.toString());
-    }
+    public String toString() {return String.format("%s %12.2f€", super.toString(), aplyPrice());}
 }

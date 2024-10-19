@@ -1,4 +1,4 @@
-package videogames.enums;
+package enums;
 
 // Array Enum
 public enum GameType {

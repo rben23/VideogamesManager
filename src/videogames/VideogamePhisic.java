@@ -1,39 +1,27 @@
 package videogames;
 
-import videogames.enums.GameGenre;
-import videogames.enums.GamePlatform;
-import videogames.enums.GameType;
-import videogames.enums.GameTitle;
+import enums.GameGenre;
+import enums.GamePlatform;
+import enums.GameType;
+import enums.GameTitle;
 
 import java.util.List;
 import java.util.Objects;
 
 public class VideogamePhisic extends Videogame {
-    // Atributos
+
     private double shipment;
 
-    // Constructor Predeterminado
     public VideogamePhisic(GameTitle title, double price, GamePlatform platform, List<GameGenre> genre, GameType type) {
         super(title, price, platform, genre, type);
         this.shipment = 10;
     }
 
-    // Constructor Paraetrizado
-    public VideogamePhisic(GameTitle title, double price, GamePlatform platform, List<GameGenre> genre, GameType type, double shipment) {
-        super(title, price, platform, genre, type);
-        this.shipment = shipment;
+    @Override
+    public double aplyPrice() {
+        return this.price + shipment;
     }
 
-    // Setters y Getters
-    public double getShipment() {
-        return shipment;
-    }
-
-    public void setShipment(double shipment) {
-        this.shipment = shipment;
-    }
-
-    // Overrides
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -48,9 +36,8 @@ public class VideogamePhisic extends Videogame {
         return Objects.hash(super.hashCode(), shipment);
     }
 
-    // Overrides -> Aplicar Envio
     @Override
-    public double aplyPrice() {
-        return this.price + shipment;
+    public String toString() {
+        return String.format("%s %12.2f€", super.toString(), aplyPrice());
     }
 }

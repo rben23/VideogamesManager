@@ -1,9 +1,9 @@
 package videogames;
 
-import videogames.enums.GameGenre;
-import videogames.enums.GamePlatform;
-import videogames.enums.GameType;
-import videogames.enums.GameTitle;
+import enums.GameGenre;
+import enums.GamePlatform;
+import enums.GameType;
+import enums.GameTitle;
 
 import java.util.List;
 import java.util.Locale;
@@ -12,14 +12,12 @@ import java.util.Objects;
 
 public abstract class Videogame implements Ivideogame {
 
-    // Atributos
     private GameTitle gameTitle;
     protected double price;
     private List<GameGenre> gameGenres;
     private GamePlatform gamePlatform;
     private GameType gameType;
 
-    // Constructor Parametrizado
     public Videogame(GameTitle gameTitle, double price, GamePlatform gamePlatform, List<GameGenre> gameGenres, GameType gameType) {
         this.gameTitle = gameTitle;
         this.price = price;
@@ -28,7 +26,6 @@ public abstract class Videogame implements Ivideogame {
         this.gameType = gameType;
     }
 
-    // Getter Titulo
     public String getTitulo() {
         return gameTitle.toString();
     }
@@ -37,25 +34,20 @@ public abstract class Videogame implements Ivideogame {
         return price;
     }
 
-    // Getter Genero
     public List<GameGenre> getGenero() {
         return gameGenres;
     }
 
-    // Getter Plataforma
     public String getPlataformaJuego() {
         return gamePlatform.toString();
     }
 
-    // Getter Tipo
     public String getTipo() {
         return gameType.toString();
     }
 
-    // Aplicar Precio Abstracto
     public abstract double aplyPrice();
 
-    // Overrides
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -74,7 +66,7 @@ public abstract class Videogame implements Ivideogame {
 
     @Override
     public String toString() {
-        return String.format(Locale.ENGLISH, "%-23s %-25s %-29s %.2f€ %19s", this.gameTitle, this.gameGenres,
-                this.gamePlatform, this.price, this.gameType);
+        return String.format(Locale.ENGLISH, "%-23s %-25s %-22s %19s", this.gameTitle, this.gameGenres,
+                this.gamePlatform, this.gameType);
     }
 }
