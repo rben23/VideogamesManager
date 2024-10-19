@@ -1,6 +1,6 @@
 import console.Console;
-import exceptions.JuegoNoCompatible;
-import exceptions.JuegoYaInstalado;
+import exceptions.GameNotCompatible;
+import exceptions.GameAlreadyInstalled;
 import videogames.VideogameDigital;
 import videogames.VideogamePhisic;
 import enums.GameGenre;
@@ -16,7 +16,7 @@ import java.util.List;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
 
-    public static void main(String[] args) throws JuegoYaInstalado, JuegoNoCompatible, IOException {
+    public static void main(String[] args) throws GameAlreadyInstalled, GameNotCompatible, IOException {
         // Inicializar Juego Digital
         List<GameGenre> gameGenres = Arrays.asList(GameGenre.AVENTURA, GameGenre.ACCIÓN);
         VideogameDigital vdMinecraft = new VideogameDigital(GameTitle.MINECRAFT, 25.95, GamePlatform.NINTENDOSWITCH,

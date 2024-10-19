@@ -1,8 +1,8 @@
 package console;
 
 import console.fileManager.FileManager;
-import exceptions.JuegoNoCompatible;
-import exceptions.JuegoYaInstalado;
+import exceptions.GameNotCompatible;
+import exceptions.GameAlreadyInstalled;
 import resources.Messages;
 import videogames.Videogame;
 import enums.GamePlatform;
@@ -45,9 +45,9 @@ public class Console implements Iconsole {
     }
 
     @Override
-    public void installVideogame(Videogame videogame) throws JuegoNoCompatible, JuegoYaInstalado, IOException {
+    public void installVideogame(Videogame videogame) throws GameNotCompatible, GameAlreadyInstalled, IOException {
         if (getGames().contains(videogameTitle(videogame))) {
-            throw new JuegoYaInstalado();
+            throw new GameAlreadyInstalled();
         } else {
             if (getPlataform().equals(videogame.getPlataformaJuego())) {
                 games.add(videogame);
@@ -56,7 +56,7 @@ public class Console implements Iconsole {
 
                 showData();
             } else {
-                throw new JuegoNoCompatible(getPlataform());
+                throw new GameNotCompatible(getPlataform());
             }
         }
     }
